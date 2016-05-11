@@ -1,0 +1,40 @@
+# CentOS-Base.repo
+
+[base]
+name=CentOS-$releasever - Base
+baseurl=http://reposrv/repos/centos/base/$basearch
+gpgcheck=0
+
+
+#released updates 
+[updates]
+name=CentOS-$releasever - Updates
+baseurl=http://reposrv/repos/centos/updates/$basearch
+gpgcheck=0
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=http://reposrv/repos/centos/extras/$basearch
+gpgcheck=0
+
+#additional packages From Epel Release
+[epel]
+name=CentOS-$releasever - Epel Release
+baseurl=http://reposrv/repos/centos/epel/$basearch
+gpgcheck=0
+
+#Official Mariadb repo
+[mariadb]
+name = MariaDB
+baseurl = http://reposrv/repos/mariadb/10/0/
+gpgcheck=0
+
+
+#Ceph Repository
+[ceph-noarch]
+name=Ceph noarch packages
+baseurl=http://reposrv/repos/ceph/rpm-infernalis/el7/noarch/
+enabled=1
+gpgcheck=0
+type=rpm-md

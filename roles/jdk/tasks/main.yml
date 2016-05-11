@@ -1,0 +1,11 @@
+---
+- name: Install jdk
+  yum: name={{jdk_url}} state=present
+
+- name: Set Java Environment Variables
+  lineinfile: dest=/etc/profile regexp='{{item.regexp}}' line='{{item.line}}'
+  with_items:
+    - {regexp: '^JAVA_HOME', line: 'JAVA_HOME={{java_home}}' }
+    - {regexp: '^JRE_HOME', line: 'JRE_HOME={{jre_home}}' }
+    - {regexp: '^CLASSPATH', line: 'CLASSPATH={{classpath}}' }
+    - {regexp: '^export JAVA_HOME', line: 'export JAVA_HOME JRE_HOME CLASSPATH'}

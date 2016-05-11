@@ -1,0 +1,4 @@
+jdk_url: http://172.16.10.50/files/java/jdk-7u67-linux-x64.rpm
+java_home: /usr/java/jdk1.7.0_67
+jre_home: /usr/java/jdk1.7.0_67/jre
+classpath: .:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib

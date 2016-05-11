@@ -2,12 +2,12 @@
   hosts: test
   remote_user: root
   vars:
-      domainname: hz.citicbank.com
-      reposrv: 172.16.10.102
-      ntp01: 172.16.10.101
-      ntp02: 172.16.10.102
-      dns01: 172.16.10.101
-      dns02: 172.16.10.102
-  roles:
-    - common
+    domainname: hz.citicbank.com
+    reposrv: 172.16.10.102
+    ntp01: 172.16.10.101
+    ntp02: 172.16.10.102
+    dns01: 172.16.10.101
+    dns02: 172.16.10.102
+    roles:
+      - common
 

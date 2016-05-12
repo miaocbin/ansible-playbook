@@ -1,4 +1,4 @@
-- hosts: test1
+- hosts: test88
   roles:
     - { 
     role: keepalived, 
@@ -6,7 +6,7 @@
     keepalived_role: "master" 
     }
 
-- hosts: test2
+- hosts: test89
   roles:
     - { 
     role: keepalived, 

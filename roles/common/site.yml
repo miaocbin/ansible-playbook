@@ -1,5 +1,5 @@
 - name: apply common configuration
-  hosts: test
+  hosts: all
   remote_user: root
   vars:
     domainname: hz.citicbank.com

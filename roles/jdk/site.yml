@@ -1,6 +1,6 @@
 - name: Install Java jdk on hosts
   hosts: 
-  - test
+  - jdk
   remote_user: root
   roles:
     - jdk

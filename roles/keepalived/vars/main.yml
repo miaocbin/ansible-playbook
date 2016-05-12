@@ -1,0 +1,5 @@
+# Variables for keepalived configuration
+
+keepalived_auth_pass: "s3cret"
+keepalived_router_id: "6"
+keepalived_shared_iface: "eth0"

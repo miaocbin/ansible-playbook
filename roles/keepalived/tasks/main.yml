@@ -1,0 +1,9 @@
+---
+- name: Install Keepalived
+  yum: name=keepalived state=present
+
+- name: change keepalived configuration
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+
+- name: enable keepalived service
+  service: name=keepalived enabled=yes state=restarted

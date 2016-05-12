@@ -1,0 +1,15 @@
+- hosts: test1
+  roles:
+    - { 
+    role: keepalived, 
+    keepalived_shared_ip: "172.16.10.90", 
+    keepalived_role: "master" 
+    }
+
+- hosts: test2
+  roles:
+    - { 
+    role: keepalived, 
+    keepalived_shared_ip: "172.16.10.90", 
+    keepalived_role: "slave" 
+    }

@@ -4,38 +4,15 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 
 # Roles of host
 
-## common
-- test81 
-- test82
-- test83 
-- test88 
-- test89 
-
-## keepalived
-- test88 
-- test89
-
-## lvs
-- test88 
-- test89
-
-## haproxy
-- test88 
-- test89
-
-## nginx
-- test88 
-- test89
-
-## jdk
-- test81 
-- test82
-- test83
-
-## tomcat
-- test81 
-- test82
-- test83
+| test81 | test82 | test83 | test88     | test89     |
+|--------|--------|--------|------------|------------|
+| common | common | common | common     | common     |
+|        |        |        | keepalived | keepalived |
+|        |        |        | lvs        | lvs        |
+|        |        |        | haproxy    | haproxy    |
+|        |        |        | nginx      | nginx      |
+| jdk    | jdk    | jdk    |            |            |
+| tomcat | tomcat | tomcat |            |            |
 
 # Log
 

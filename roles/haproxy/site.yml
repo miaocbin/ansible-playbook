@@ -1,0 +1,10 @@
+- name: Install haproxy load balancer
+  hosts: 
+  - haproxy
+  remote_user: root
+  roles: 
+  - haproxy
+  vars:
+    syslogsrv: 172.16.10.50
+    adminuser: admin
+    adminpass: admin

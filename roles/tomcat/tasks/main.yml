@@ -1,0 +1,34 @@
+---
+- name: Add group "tomcat"
+  group: name=tomcat
+
+- name: Add user "tomcat"
+  user: name=tomcat group=tomcat home=/opt/tomcat createhome=no
+
+- name: Download Tomcat
+  get_url: url={{tomcat_url}} dest=/opt/
+
+- name: Extract archive
+  command: chdir=/opt/ /bin/tar xvf /opt/{{tomcat_filename}}.tar.gz -C /opt creates=/opt/{{tomcat_filename}}
+
+- name: Symlink install directory
+  file: src=/opt/{{tomcat_filename}} path=/opt/tomcat state=link
+
+- name: Configure Tomcat server
+  template: src=server.xml.j2 dest=/opt/tomcat/conf/server.xml
+  notify: restart tomcat
+
+- name: Change ownership of Tomcat installation
+  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+
+- name: Add mariadb java lib
+  copy: src=mariadb-java-client-1.3.3.jar dest=/opt/tomcat/lib/
+
+- name: Install Tomcat init script
+  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+
+- name: Start tomcat
+  service: name=tomcat state=started enabled=yes
+
+- name: wait for tomcat to start
+  wait_for: port={{tomcat_port}}

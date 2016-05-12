@@ -1,0 +1,16 @@
+- name: Install tomcat
+  hosts: 
+  - test
+  remote_user: root
+  roles: 
+  - tomcat
+  vars:
+    lb-dev: 172.16.10.50
+    tomcat_filename: apache-tomcat-8.0.9
+    tomcat_url: http://172.16.10.50/files/java/{{tomcat_filename}}.tar.gz
+    tomcat_port: 8080
+    dbname: dbname
+    dbuser: dbuser
+    dbpass: dbpass
+    dburl: jdbc:mysql://lb-dev:3306/{{dbname}}
+    dbprop: autoReconnect=true;useUnicode=yes;characterEncoding=utf8;

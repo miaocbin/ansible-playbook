@@ -1,0 +1,9 @@
+---
+- name: Install lvs
+  yum: name=ipvsadm state=present
+
+- name: Enable lvs DR mode in keepalived configuration
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf backup=yes
+
+- name: Enable keepalived service
+  service: name=keepalived enabled=yes state=restarted

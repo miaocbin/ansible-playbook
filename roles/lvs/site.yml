@@ -1,0 +1,13 @@
+- hosts: test88
+  roles:
+    - { 
+    role: lvs, 
+    keepalived_role: "master" 
+    }
+
+- hosts: test89
+  roles:
+    - { 
+    role: lvs, 
+    keepalived_role: "slave" 
+    }

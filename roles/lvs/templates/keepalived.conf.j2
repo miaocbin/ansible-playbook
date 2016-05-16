@@ -1,0 +1,53 @@
+global_defs {
+}
+
+vrrp_instance VI_1 {
+    state {{ keepalived_role }}
+    interface {{ keepalived_shared_iface }}
+    virtual_router_id {{ keepalived_router_id }}
+    {% if keepalived_role.lower() == "master" %}
+    priority 105
+    {% else %}
+    priority 100
+    {% endif %}   
+    advert_int 1
+        authentication {
+        auth_type PASS
+        auth_pass {{ keepalived_auth_pass }}
+    }
+
+    virtual_ipaddress {
+        {{ keepalived_shared_ip }} 
+    }
+}
+
+virtual_server {{keepalived_shared_ip}} 80
+    delay_loop 10
+    lb_algo rr
+    lb_kind DR
+    persistence_timeout 9600
+    protocol TCP
+
+    real_server 172.16.10.81 80 {
+        weight 1
+        TCP_CHECK {
+          connect_timeout 10
+          connect_port    80
+        }
+    }
+    real_server 172.16.10.82 80 {
+        weight 1
+        TCP_CHECK {
+          connect_timeout 10
+          connect_port    80
+        }
+    }
+    real_server 172.16.10.83 80 {
+        weight 1
+        TCP_CHECK {
+          connect_timeout 10
+          connect_port    80
+        }
+    }
+}
+

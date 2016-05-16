@@ -37,13 +37,6 @@
       <!-- Editable user database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
-    <!--
-    <Realm className="org.apache.catalina.realm.DataSourceRealm" 
-            dataSourceName="jdbc/radius" 
-            userTable="adminusers" userNameCol="user_name" userCredCol="user_pass"
-            userRoleTable="adminuser_roles" roleNameCol="role_name" />
-    </Realm>
-    -->
     <Resource name="jdbc/{{dbname}}" 
         auth="Container" 
         type="javax.sql.DataSource" 
@@ -149,7 +142,7 @@
             resourceName="UserDatabase"/>
         -->
         <Realm className="org.apache.catalina.realm.DataSourceRealm" 
-            dataSourceName="jdbc/radius" 
+            dataSourceName="jdbc/dbname" 
             userTable="adminusers" userNameCol="user_name" userCredCol="user_pass"
             userRoleTable="adminuser_roles" roleNameCol="role_name" />
     </Realm>

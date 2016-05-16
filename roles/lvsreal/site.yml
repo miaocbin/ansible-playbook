@@ -1,0 +1,8 @@
+- name: Setup lvs DR mode in real server side
+  hosts: 
+  - lvsreal
+  remote_user: root
+  roles: 
+  - lvsreal
+  vars:
+    vip: 172.16.10.90

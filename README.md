@@ -4,18 +4,21 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 
 # Roles of host
 
-| test81 | test82 | test83 | test88     | test89     |
-|--------|--------|--------|------------|------------|
-| common | common | common | common     | common     |
-|        |        |        | keepalived | keepalived |
-|        |        |        | lvs        | lvs        |
-|        |        |        | haproxy    | haproxy    |
-|        |        |        | nginx      | nginx      |
-| jdk    | jdk    | jdk    |            |            |
-| tomcat | tomcat | tomcat |            |            |
+| test81  | test82  | test83  | test88     | test89     |
+|---------|---------|---------|------------|------------|
+| common  | common  | common  | common     | common     |
+|         |         |         | keepalived | keepalived |
+|         |         |         | lvs        | lvs        |
+|         |         |         | haproxy    | haproxy    |
+|         |         |         | nginx      | nginx      |
+| jdk     | jdk     | jdk     |            |            |
+| tomcat  | tomcat  | tomcat  |            |            |
+| lvsreal | lvsreal | lvsreal |            |            |
 
 # Log
 
+- [2016-05-16] role lvsreal: setup lvs DR mode on real server
+- [2016-05-16] role lvs: setup lvs DR mode on load balancer
 - [2016-05-12] role haproxy: install haproxy software load balancer
 - [2016-05-12] role keepalived: install keepalived high-availability routing software which often work together with lvs, haproxy or nginx
 - [2016-05-12] role tomcat: install tomcat which depends on role jdk

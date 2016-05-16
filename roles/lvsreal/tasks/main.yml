@@ -1,0 +1,6 @@
+---
+- name: Copy lvs real script to remote
+  template: src=lvs_real.sh.j2 dest=/usr/sbin/lvs_real.sh mode=755
+
+- name: Start lvs real to add a new loopback interface and bind vip
+  command: /usr/sbin/lvs_real.sh start

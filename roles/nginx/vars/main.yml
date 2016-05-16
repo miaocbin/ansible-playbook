@@ -1,0 +1,5 @@
+# Variables for nginx configuration
+
+webapp01: 172.16.10.81
+webapp02: 172.16.10.82
+webapp03: 172.16.10.83

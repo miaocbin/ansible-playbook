@@ -17,6 +17,7 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 
 # Log
 
+- [2016-05-16] role nginx: install and setup basic for reverse proxy
 - [2016-05-16] role lvsreal: setup lvs DR mode on real server
 - [2016-05-16] role lvs: setup lvs DR mode on load balancer
 - [2016-05-12] role haproxy: install haproxy software load balancer

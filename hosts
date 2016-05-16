@@ -17,7 +17,9 @@ test89
 [jdk]
 test81
 test82
+test83
 
 [tomcat]
 test81
 test82
+test83

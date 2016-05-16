@@ -21,32 +21,32 @@ vrrp_instance VI_1 {
     }
 }
 
-virtual_server {{keepalived_shared_ip}} 80
+virtual_server {{keepalived_shared_ip}} 8080
     delay_loop 10
     lb_algo rr
     lb_kind DR
     persistence_timeout 9600
     protocol TCP
 
-    real_server 172.16.10.81 80 {
+    real_server 172.16.10.81 8080 {
         weight 1
         TCP_CHECK {
           connect_timeout 10
-          connect_port    80
+          connect_port    8080
         }
     }
-    real_server 172.16.10.82 80 {
+    real_server 172.16.10.82 8080 {
         weight 1
         TCP_CHECK {
           connect_timeout 10
-          connect_port    80
+          connect_port    8080
         }
     }
-    real_server 172.16.10.83 80 {
+    real_server 172.16.10.83 8080 {
         weight 1
         TCP_CHECK {
           connect_timeout 10
-          connect_port    80
+          connect_port    8080
         }
     }
 }

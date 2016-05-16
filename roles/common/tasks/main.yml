@@ -7,21 +7,19 @@
 
 # Add records in /etc/hosts, you can add all you want
 - name: Add records in /etc/hosts to resolve host to ip address
-  lineinfile:                                                                    
-  dest: /etc/hosts
-  regexp: "{{item.regexp}}"                                                    
-  line: "{{item.line}}"                                                        
-  with_items:                                                                    
+  lineinfile: dest=/etc/hosts regexp="{{item.regexp}}" line="{{item.line}}" 
+  with_items:                                                              
   - {regexp: '^{{reposrv}}', line: '{{reposrv}} reposrv' } 
 
 - name: Add custom yum repo
   template: src=my.repo.j2 dest=/etc/yum.repos.d/my.repo
-  - name: Remove NetworkManager
-    yum: name={{ item }} state=absent
-    with_items:
-      - NetworkManager-tui
-      - NetworkManager-libnm
-      - NetworkManager
+
+- name: Remove NetworkManager
+  yum: name={{ item }} state=absent
+  with_items:
+    - NetworkManager-tui
+    - NetworkManager-libnm
+    - NetworkManager
 
 - name: Add name server in /etc/resolv.conf
   template: src=resolv.conf.j2 dest=/etc/resolv.conf

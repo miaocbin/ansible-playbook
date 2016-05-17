@@ -1,0 +1,43 @@
+---
+# These tasks install mariadb galera cluster
+- name: Install MariaDB Galera Cluster
+  yum: name={{ item }} state=present
+  with_items:
+   - MariaDB-Galera-server
+   - MariaDB-client
+   - galera
+  when: ansible_hostname == "test81" or 
+        ansible_hostname == "test82" 
+
+- name: Install Galera on arbitrator
+  yum: name=galera state=present
+  when: ansible_hostname == "test83" 
+
+- name: Copy grantsql.sh script to remote
+  template: src=grantsql.sh.j2 dest=/root/grantsql.sh
+  when: ansible_hostname == "test81" or 
+        ansible_hostname == "test82" 
+
+- name: Copy mariadb galera cluster configuration
+  template: src=server.cnf.j2 dest=/etc/my.cnf.d/server.cnf
+  when: ansible_hostname == "test81" or 
+        ansible_hostname == "test82" 
+
+- name: Copy arbitrator configuration
+  template: src=garb.j2 dest=/etc/sysconfig/garb
+  when: ansible_hostname == "test83"
+
+- name: Copy startup  script to remote
+  template: src=startup.sh.j2 dest=/root/startup.sh
+
+- name: Execute startup on test81
+  command: /bin/sh /root/startup.sh
+  when: ansible_hostname == "test81"
+
+- name: Execute startup on test82
+  command: /bin/sh /root/startup.sh
+  when: ansible_hostname == "test82"
+
+- name: Execute startup on test83
+  command: /bin/sh /root/startup.sh
+  when: ansible_hostname == "test83"

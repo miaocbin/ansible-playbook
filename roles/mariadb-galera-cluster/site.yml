@@ -1,0 +1,6 @@
+- name: Install mariadb galera cluster with two sql nodes and one arbitrator
+  hosts: 
+  - mariadb-galera-cluster
+  remote_user: root
+  roles: 
+  - mariadb-galera-cluster

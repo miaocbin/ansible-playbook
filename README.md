@@ -4,19 +4,21 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 
 # Roles of host
 
-| test81  | test82  | test83  | test88     | test89     |
-|---------|---------|---------|------------|------------|
-| common  | common  | common  | common     | common     |
-|         |         |         | keepalived | keepalived |
-|         |         |         | lvs        | lvs        |
-|         |         |         | haproxy    | haproxy    |
-|         |         |         | nginx      | nginx      |
-| jdk     | jdk     | jdk     |            |            |
-| tomcat  | tomcat  | tomcat  |            |            |
-| lvsreal | lvsreal | lvsreal |            |            |
+| test81                          | test82                          | test83                             | test88     | test89     |
+|---------------------------------|---------------------------------|------------------------------------|------------|------------|
+| common                          | common                          | common                             | common     | common     |
+|                                 |                                 |                                    | keepalived | keepalived |
+|                                 |                                 |                                    | lvs        | lvs        |
+|                                 |                                 |                                    | haproxy    | haproxy    |
+|                                 |                                 |                                    | nginx      | nginx      |
+| jdk                             | jdk                             | jdk                                |            |            |
+| tomcat                          | tomcat                          | tomcat                             |            |            |
+| lvsreal                         | lvsreal                         | lvsreal                            |            |            |
+| mariadb-galera-cluster(sqlnode) | mariadb-galera-cluster(sqlnode) | mariadb-galera-cluster(arbitrator) |            |            |
 
 # Log
 
+- [2016-05-17] role mariadb-galera-cluster: setup with two sql nodes and one arbitrator
 - [2016-05-16] role nginx: install and setup basic for reverse proxy
 - [2016-05-16] role lvsreal: setup lvs DR mode on real server
 - [2016-05-16] role lvs: setup lvs DR mode on load balancer

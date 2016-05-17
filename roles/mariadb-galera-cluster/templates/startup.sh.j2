@@ -1,0 +1,28 @@
+{% if ansible_hostname=='test81' %}
+#reboot
+mv -f /etc/my.cnf.d/server.cnf /etc/my.cnf.d/server.cnf.bak
+service mysql start
+sh grantsql.sh
+service mysql stop
+echo "sleeping for 3s"
+sleep 3
+mv -f /etc/my.cnf.d/server.cnf.bak /etc/my.cnf.d/server.cnf
+service mysql start --wsrep-new-cluster
+{% endif %}
+{% if ansible_hostname=='test82' %}
+#reboot
+mv -f /etc/my.cnf.d/server.cnf /etc/my.cnf.d/server.cnf.bak
+service mysql start
+sh grantsql.sh
+service mysql stop
+echo "sleeping for 3s"
+sleep 3
+mv -f /etc/my.cnf.d/server.cnf.bak /etc/my.cnf.d/server.cnf
+service mysql start
+{% endif %}
+{% if ansible_hostname=='test83' %}
+#reboot
+touch /var/log/garbd.log
+chmod a+w /var/log/garbd.log
+service garb start
+{% endif %}

@@ -1,0 +1,7 @@
+# Variables for mariadb-galera-cluster configuration
+
+test81: 172.16.10.81
+test82: 172.16.10.82
+test83: 172.16.10.83
+dbuser: root
+dbpass: dbpass

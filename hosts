@@ -28,3 +28,8 @@ test83
 test81
 test82
 test83
+
+[mariadb-galera-cluster]
+test81
+test82
+test83

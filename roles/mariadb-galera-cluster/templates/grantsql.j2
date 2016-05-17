@@ -1,0 +1,16 @@
+echo "Deleting empty user"
+mysql -e "DELETE FROM mysql.user WHERE User='' or Password=''"
+
+echo "Grant privileges to dbuser"
+mysql -e "GRANT ALL ON *.* TO '{{dbuser}}'@'%' IDENTIFIED BY '{{dbpass}}'"
+
+echo "Grant privileges to sst_user"
+mysql -e "GRANT USAGE ON *.* to sst_user@'%' IDENTIFIED BY 'dbpass'"
+
+echo "Grant privileges to sst_user"
+mysql -e "GRANT ALL PRIVILEGES on *.* to sst_user@'%'"
+
+echo "FLUSH privileges"
+mysql -e "FLUSH PRIVILEGES"
+
+

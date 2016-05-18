@@ -1,0 +1,29 @@
+* Ansible Playbooks
+
+Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files are edited using vim with [[https://github.com/chase/vim-ansible-yaml][vim-ansible-yaml]] plugin.
+
+* Roles of host
+|---+---------------------------------+---------------------------------+------------------------------------+------------+------------|
+|   | test81                          | test82                          | test83                             | test88     | test89     |
+|---+---------------------------------+---------------------------------+------------------------------------+------------+------------|
+| 1 | common                          | common                          | common                             | common     | common     |
+| 2 |                                 |                                 |                                    | keepalived | keepalived |
+| 3 |                                 |                                 |                                    | lvs        | lvs        |
+| 4 |                                 |                                 |                                    | haproxy    | haproxy    |
+| 5 |                                 |                                 | nginx                              | nginx      |            |
+| 6 | jdk                             | jdk                             | jdk                                |            |            |
+| 7 | tomcat                          | tomcat                          | tomcat                             |            |            |
+| 8 | lvsreal                         | lvsreal                         | lvsreal                            |            |            |
+| 9 | mariadb-galera-cluster(sqlnode) | mariadb-galera-cluster(sqlnode) | mariadb-galera-cluster(arbitrator) |            |            |
+
+* Log
+
+- [2016-05-17] role mariadb-galera-cluster: setup with two sql nodes and one arbitrator
+- [2016-05-16] role nginx: install and setup basic for reverse proxy
+- [2016-05-16] role lvsreal: setup lvs DR mode on real server
+- [2016-05-16] role lvs: setup lvs DR mode on load balancer
+- [2016-05-12] role haproxy: install haproxy software load balancer
+- [2016-05-12] role keepalived: install keepalived high-availability routing software which often work together with lvs, haproxy or nginx
+- [2016-05-12] role tomcat: install tomcat which depends on role jdk
+- [2016-05-11] role jdk: install java jdk using rpm and set envrionment variable
+- [2016-05-11] role common: baseline configuration for all nodes

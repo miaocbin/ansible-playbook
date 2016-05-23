@@ -1,0 +1,12 @@
+---
+- name: Install elasticsearch
+  yum: name={{es_url}} state=present
+
+- name: change elasticsearch configuration
+  template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+
+- name: change elasticsearch sysconfig
+  template: src=elasticsearch.j2 dest=/etc/sysconfig/elasticsearch
+
+- name: enable elasticsearch service
+  service: name=elasticsearch enabled=yes state=restarted

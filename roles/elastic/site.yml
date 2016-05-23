@@ -1,0 +1,6 @@
+- name: Setup elasticsearch cluster with 3 nodes
+  hosts: 
+  - elastic
+  remote_user: root
+  roles:
+    - elastic

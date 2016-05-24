@@ -10,15 +10,17 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 |  2 |                 |                 |                    | keepalived | keepalived |
 |  3 |                 |                 |                    | lvs        | lvs        |
 |  4 |                 |                 |                    | haproxy    | haproxy    |
-|  5 |                 |                 | nginx              | nginx      |            |
+|  5 |                 |                 |                    | nginx      | nginx      |
 |  6 | jdk             | jdk             | jdk                |            |            |
 |  7 | tomcat          | tomcat          | tomcat             |            |            |
 |  8 | lvsreal         | lvsreal         | lvsreal            |            |            |
 |  9 | galera(sqlnode) | galera(sqlnode) | galera(arbitrator) |            |            |
 | 10 | elastic         | elastic         | elastic            |            |            |
+| 11 |                 |                 |                    | logstash   |            |
 
 * Log
 
+- [2016-05-24] role logstash: setup logstash on a single node
 - [2016-05-23] role elastic: setup elastic cluster with 3 nodes
 - [2016-05-17] role mariadb-galera-cluster: setup with two sql nodes and one arbitrator
 - [2016-05-16] role nginx: install and setup basic for reverse proxy

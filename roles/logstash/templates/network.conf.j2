@@ -1,0 +1,34 @@
+input {
+  tcp {
+    port => "5044"
+    type => "syslog"
+    tags => ["network"]
+  }
+} #end input block
+
+filter {
+  if [type] == "syslog" {
+    grok {
+      match => { "message" => "%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?: %{GREEDYDATA:syslog_message}" }
+      add_field => [ "received_at", "%{@timestamp}" ]
+      add_field => [ "received_from", "%{syslog_hostname}" ]
+      remove_field => [ "message", "syslog_hostname", "host", "@timestamp"]
+    }
+    syslog_pri { }
+    date {
+      timezone => "Asia/Shanghai"
+      match => [ "syslog_timestamp", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss" ]
+    }
+  }
+} #end filter block
+
+output {
+  elasticsearch {
+    hosts => "lb:9200"
+  }
+#  stdout { 
+#    codec => rubydebug {
+#      metadata => true
+#    }
+#  }
+} #end output block

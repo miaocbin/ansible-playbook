@@ -1,0 +1,15 @@
+---
+- name: Install unzip
+  yum: name=unzip state=present
+
+- name: Install kibana
+  yum: name={{kibana_url}} state=present
+
+- name: change kibana configuration
+  template: src=kibana.yml.j2 dest=/opt/kibana/config/kibana.yml
+
+- name: enable kibana service
+  service: name=kibana enabled=yes state=restarted
+
+- name: scripts to download and install beats-dashboard
+  script: kibana-dashboard.sh

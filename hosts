@@ -41,3 +41,6 @@ test83
 
 [logstash]
 test88
+
+[kibana]
+test81

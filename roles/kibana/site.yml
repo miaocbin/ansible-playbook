@@ -1,0 +1,6 @@
+- name: Setup kibana on single host
+  hosts: 
+    - kibana
+  remote_user: root
+  roles:
+    - kibana

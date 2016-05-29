@@ -1,0 +1,25 @@
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime localtime
+service timestamps log datetime localtime
+service password-encryption
+logging buffered 512000
+clock timezone Beijing 8
+no ip source-route
+no ip domain lookup
+ip domain name xyz.com
+no ip http server
+no ip http secure-server
+
+!
+logging {{syslogsrv01}}
+logging {{syslogsrv02}}
+!
+snmp-server community {{community}} RO
+snmp-server ifindex persist
+ntp server {{ntpsrv01}}
+ntp server {{ntpsrv02}}
+no ntp server {{ntpsrv03}}
+no ntp server {{ntpsrv04}}
+no ntp server {{ntpsrv05}}
+no ntp server {{ntpsrv06}}

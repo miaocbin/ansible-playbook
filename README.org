@@ -2,7 +2,7 @@
 
 Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files are edited using vim with [[https://github.com/chase/vim-ansible-yaml][vim-ansible-yaml]] plugin.
 
-* Ip address assign
+* IP address assignments
 |-----+----------+--------------|
 | seq | hostname |           ip |
 |-----+----------+--------------|
@@ -29,10 +29,14 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 |   9 | galera(sqlnode) | galera(sqlnode) | galera(arbitrator) |            |            |
 |  10 | elastic         | elastic         | elastic            |            |            |
 |  11 |                 |                 |                    | logstash   |            |
-|  12 | kibana          |                 |                    |            |            |
+|  12 | KIBANA          |                 |                    |            |            |
+
+** cisco router
+- r1
 
 * Log
 
+- [2016-05-29] role cisco_ios: config cisco router with ios_config or ios_template
 - [2016-05-24] role kibana: setup kibana on single node
 - [2016-05-24] role logstash: setup logstash on single node
 - [2016-05-23] role elastic: setup elastic cluster with 3 nodes

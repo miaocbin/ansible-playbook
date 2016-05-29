@@ -1,0 +1,68 @@
+---
+- name: define provider
+  set_fact:
+    provider:
+      host: "{{inventory_hostname}}"
+      username: "{{username}}"
+      password: "{{password}}"
+
+- name: run show commands with ios_command
+  ios_command:
+    provider: "{{provider}}"
+    commands:
+      - show version
+      - show ip interface brief
+      - show inventory
+      - show running | include logging
+  register: show_result
+
+- debug: var=show_result.stdout_lines
+
+- name: change syslog server with ios_config
+  ios_config:
+    provider: "{{ provider }}"
+    authorize: yes
+    lines:
+      - logging {{syslogsrv01}}
+      - logging {{syslogsrv02}}
+    replace: line
+    match: line
+    before: 
+      - no logging {{syslogsrv03}}
+      - no logging {{syslogsrv04}}
+    force: true
+
+- name: run show logging after change with ios_config
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+      - show logging
+  register: after_change_syslog
+
+- debug: var=after_change_syslog.stdout_lines
+
+- name: change syslog server with ios_template
+  ios_template:
+    host: "{{inventory_hostname}}"
+    username: "{{username}}"
+    password: "{{password}}"
+    src: config.j2
+    force: true
+
+- name: run "show running | include logging" after change made
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+      - show running | include logging
+  register: syslogsrv_list
+
+- debug: var=syslogsrv_list.stdout_lines
+
+- name: save running-config to startup-config
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+      - write
+  register: write_output
+
+- debug: var=write_output.stdout_lines

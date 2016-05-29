@@ -1,0 +1,12 @@
+username: admin
+password: password123
+syslogsrv01: 172.168.10.1
+syslogsrv02: 172.168.10.2
+syslogsrv03: 172.168.10.3
+syslogsrv04: 172.168.10.4
+ntpsrv01: 172.168.10.1
+ntpsrv02: 172.168.10.2
+ntpsrv03: 172.168.10.3
+ntpsrv04: 172.168.10.4
+ntpsrv05: 172.168.10.5
+ntpsrv06: 172.168.10.6

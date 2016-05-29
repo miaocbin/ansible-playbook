@@ -1,0 +1,7 @@
+- name: change and show running-config on cisco ios device
+  hosts: 
+  - cisco
+  gather_facts: no
+  connection: local
+  roles: 
+  - cisco_ios

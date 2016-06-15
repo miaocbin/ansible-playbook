@@ -45,5 +45,10 @@ test88
 [kibana]
 test81
 
+[zk]
+test81
+test82
+test83
+
 [cisco]
 r1

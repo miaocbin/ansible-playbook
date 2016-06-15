@@ -1,0 +1,16 @@
+---
+zookeeper_version: 3.4.8
+zookeeper_url: http://172.16.10.50/files/software/zookeeper-{{zookeeper_version}}.tar.gz
+
+apt_cache_timeout: 3600
+client_port: 2181
+init_limit: 5
+sync_limit: 2
+tick_time: 2000
+data_dir: /var/lib/zookeeper
+log_dir: /var/log/zookeeper
+zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
+
+# List of dict (i.e. {zookeeper_hosts:[{host:,id:},{host:,id:},...]})
+zookeeper_hosts:
+  [{host: test81, id: 1}, {host: test82, id: 2}, {host: test83, id: 3}]

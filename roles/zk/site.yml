@@ -1,0 +1,6 @@
+- name: Setup an zookeeper cluster of three nodes
+  hosts: 
+  - zk
+  remote_user: root
+  roles:
+    - zk

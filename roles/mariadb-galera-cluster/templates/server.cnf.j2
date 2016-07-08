@@ -11,6 +11,11 @@
 # this is only for the mysqld standalone daemon
 [mysqld]
 skip-name-resolve
+wait_timeout = 99999999
+long_query_time = 1
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow-query.log
+log_output = FILE,TABLE
 
 #
 # * Galera-related settings

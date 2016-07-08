@@ -13,6 +13,11 @@
   yum: name=galera state=present
   when: ansible_hostname == "test83" 
 
+- name: Create slow query log directory
+  file: state=directory path=/var/log/mysql owner=mysql group=mysql
+  when: ansible_hostname == "test81" or 
+        ansible_hostname == "test82" 
+
 - name: Copy grantsql.sh script to remote
   template: src=grantsql.sh.j2 dest=/root/grantsql.sh
   when: ansible_hostname == "test81" or 

@@ -1,0 +1,26 @@
+---
+- name: Create prometheus directory
+  file: path=/opt/download/ state=directory
+
+- name: Download prometheus
+  get_url: url={{prometheus_url}} dest=/opt/download
+
+- name: Extract archive
+  unarchive: src=/opt/download/{{prometheus_filename_prefix}}.tar.gz dest=/opt copy=no
+
+- name: Copy prometheus configuration file
+  copy: src=prometheus.yml dest=/opt/{{prometheus_filename_prefix}}/prometheus.yml
+
+- name: Create tgroups directory
+  file: path=/opt/{{prometheus_filename_prefix}}/tgroups state=directory
+
+- name: Copy startup.sh
+  template: src=startup.sh.j2 dest=/opt/{{prometheus_filename_prefix}}/startup.sh mode="u+x"
+
+- shell: /bin/sh startup.sh
+  args:
+    chdir: "/opt/{{prometheus_filename_prefix}}"
+    executable: /bin/bash
+
+- name: wait for prometheus to start
+  wait_for: port={{prometheus_port}}

@@ -1,0 +1,13 @@
+#!bin/sh
+# start prometheus server
+
+pid=`pidof prometheus`
+if [[ X"" = X"$pid" ]]; then
+    echo "prometheus not start"
+else
+    echo "killing prometheus ..."
+    kill -9 $pid
+fi
+workdir=`pwd`
+cd $workdir
+nohup ./prometheus -config.file=prometheus.yml &

@@ -67,3 +67,6 @@ test89
 [mysqld_exporter]
 test81
 test82
+
+[prometheus]
+test88

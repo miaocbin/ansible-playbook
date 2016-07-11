@@ -1,0 +1,10 @@
+- name: Install prometheus
+  hosts: 
+  - prometheus
+  remote_user: root
+  roles: 
+  - prometheus
+  vars:
+    prometheus_filename_prefix: prometheus-0.20.0.linux-amd64
+    prometheus_url: http://172.16.10.50/files/monitor/prometheus/{{prometheus_filename_prefix}}.tar.gz
+    prometheus_port: 9090

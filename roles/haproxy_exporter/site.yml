@@ -1,0 +1,9 @@
+- name: Setup Prometheus HAProxy Exporter
+  hosts: 
+  - haproxy_exporter
+  remote_user: root
+  roles: 
+  - haproxy_exporter
+  vars:
+    haproxy_exporter_dir: /opt/haproxy_exporter
+    haproxy_exporter_port: 9101

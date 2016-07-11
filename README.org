@@ -15,29 +15,31 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 |   7 | test     | 172.16.10.90 |
 
 * Roles of host
-|-----+-----------------+-----------------+--------------------+---------------+---------------|
-| seq | test81          | test82          | test83             | test88        | test89        |
-|-----+-----------------+-----------------+--------------------+---------------+---------------|
-|   1 | common          | common          | common             | common        | common        |
-|   2 |                 |                 |                    | keepalived    | keepalived    |
-|   3 |                 |                 |                    | lvs           | lvs           |
-|   4 |                 |                 |                    | haproxy       | haproxy       |
-|   5 |                 |                 |                    | nginx         | nginx         |
-|   6 | jdk             | jdk             | jdk                |               |               |
-|   7 | tomcat          | tomcat          | tomcat             |               |               |
-|   8 | lvsreal         | lvsreal         | lvsreal            |               |               |
-|   9 | galera(sqlnode) | galera(sqlnode) | galera(arbitrator) |               |               |
-|  10 | elastic         | elastic         | elastic            |               |               |
-|  11 |                 |                 |                    | logstash      |               |
-|  12 | KIBANA          |                 |                    |               |               |
-|  13 | zk              | zk              | zk                 |               |               |
-|  14 | node_exporter   | node_exporter   | node_exporter      | node_exporter | node_exporter |
+|-----+-----------------+-----------------+--------------------+------------------+------------------|
+| seq | test81          | test82          | test83             | test88           | test89           |
+|-----+-----------------+-----------------+--------------------+------------------+------------------|
+|   1 | common          | common          | common             | common           | common           |
+|   2 |                 |                 |                    | keepalived       | keepalived       |
+|   3 |                 |                 |                    | lvs              | lvs              |
+|   4 |                 |                 |                    | haproxy          | haproxy          |
+|   5 |                 |                 |                    | nginx            | nginx            |
+|   6 | jdk             | jdk             | jdk                |                  |                  |
+|   7 | tomcat          | tomcat          | tomcat             |                  |                  |
+|   8 | lvsreal         | lvsreal         | lvsreal            |                  |                  |
+|   9 | galera(sqlnode) | galera(sqlnode) | galera(arbitrator) |                  |                  |
+|  10 | elastic         | elastic         | elastic            |                  |                  |
+|  11 |                 |                 |                    | logstash         |                  |
+|  12 | KIBANA          |                 |                    |                  |                  |
+|  13 | zk              | zk              | zk                 |                  |                  |
+|  14 | node_exporter   | node_exporter   | node_exporter      | node_exporter    | node_exporter    |
+|  15 |                 |                 |                    | haproxy_exporter | haproxy_exporter |
 
 ** cisco router
 - r1
 
 * Log
 
+- [2016-07-11] role haproxy_exporter: setup prometheus haproxy_exporter for monitoring haproxy metrics
 - [2016-07-11] role node_exporter: setup prometheus node_exporter for monitoring system metrics
 - [2016-06-15] role zk: setup zookeeper with 3 nodes
 - [2016-05-29] role cisco_ios: config cisco router with ios_config or ios_template

@@ -59,3 +59,7 @@ test82
 test83
 test88
 test89
+
+[haproxy_exporter]
+test88
+test89

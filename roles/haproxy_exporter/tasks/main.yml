@@ -1,0 +1,17 @@
+---
+- name: Create haproxy_exporter directory
+  file: path={{haproxy_exporter_dir}} state=directory
+
+- name: copy haproxy_exporter
+  copy: src=haproxy_exporter dest={{haproxy_exporter_dir}} mode="u+x"
+
+- name: copy start_haproxy_exporter.sh
+  copy: src=start_haproxy_exporter.sh dest={{haproxy_exporter_dir}}
+
+- shell: /bin/sh start_haproxy_exporter.sh
+  args:
+    chdir: "{{haproxy_exporter_dir}}"
+    executable: /bin/bash
+
+- name: wait for haproxy exporter to start
+  wait_for: port={{haproxy_exporter_port}}

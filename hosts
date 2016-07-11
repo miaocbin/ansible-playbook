@@ -52,3 +52,10 @@ test83
 
 [cisco]
 r1
+
+[node_exporter]
+test81
+test82
+test83
+test88
+test89

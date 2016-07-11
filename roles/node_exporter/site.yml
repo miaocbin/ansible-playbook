@@ -1,0 +1,9 @@
+- name: Setup Prometheus Node Exporter
+  hosts: 
+  - node_exporter
+  remote_user: root
+  roles: 
+  - node_exporter
+  vars:
+    node_exporter_dir: /opt/node_exporter
+    node_exporter_port: 9100

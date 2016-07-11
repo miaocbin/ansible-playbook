@@ -1,0 +1,20 @@
+---
+- name: Create node_exporter directory
+  file: path={{node_exporter_dir}} state=directory
+
+- name: copy node_exporter.txt
+  copy: src=node_exporter.txt dest={{node_exporter_dir}} 
+
+- name: copy node_exporter
+  copy: src=node_exporter dest={{node_exporter_dir}} mode="u+rx"
+
+- name: copy start_node_exporter.sh
+  copy: src=start_node_exporter.sh dest={{node_exporter_dir}}
+
+- shell: /bin/sh start_node_exporter.sh
+  args:
+    chdir: "{{node_exporter_dir}}"
+    executable: /bin/bash
+
+- name: wait for node exporter to start
+  wait_for: port={{node_exporter_port}}

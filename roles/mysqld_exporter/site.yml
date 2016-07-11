@@ -1,0 +1,9 @@
+- name: Setup Prometheus Mysql Exporter
+  hosts: 
+  - mysqld_exporter
+  remote_user: root
+  roles: 
+  - mysqld_exporter
+  vars:
+    mysqld_exporter_dir: /opt/mysqld_exporter
+    mysqld_exporter_port: 9104

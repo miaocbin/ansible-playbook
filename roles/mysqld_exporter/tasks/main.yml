@@ -1,0 +1,20 @@
+---
+- name: Create mysqld_exporter directory
+  file: path={{mysqld_exporter_dir}} state=directory
+
+- name: copy mysqld_exporter
+  copy: src=mysqld_exporter dest={{mysqld_exporter_dir}} mode="u+x"
+
+- name: copy my.cnf to /root/.my.cnf
+  copy: src=my.cnf dest=/root/.my.cnf
+
+- name: copy start_mysqld_exporter.sh
+  copy: src=start_mysqld_exporter.sh dest={{mysqld_exporter_dir}}
+
+- shell: /bin/sh start_mysqld_exporter.sh
+  args:
+    chdir: "{{mysqld_exporter_dir}}"
+    executable: /bin/sh
+
+- name: wait for mysql exporter to start
+  wait_for: port={{mysqld_exporter_port}}

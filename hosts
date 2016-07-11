@@ -63,3 +63,7 @@ test89
 [haproxy_exporter]
 test88
 test89
+
+[mysqld_exporter]
+test81
+test82

@@ -33,12 +33,14 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 |  13 | zk              | zk              | zk                 |                  |                  |
 |  14 | node_exporter   | node_exporter   | node_exporter      | node_exporter    | node_exporter    |
 |  15 |                 |                 |                    | haproxy_exporter | haproxy_exporter |
+|  16 | mysqld_exporter | mysqld_exporter |                    |                  |                  |
 
 ** cisco router
 - r1
 
 * Log
 
+- [2016-07-11] role mysqld_exporter: setup prometheus mysqld_exporter for monitoring mysqld metrics
 - [2016-07-11] role haproxy_exporter: setup prometheus haproxy_exporter for monitoring haproxy metrics
 - [2016-07-11] role node_exporter: setup prometheus node_exporter for monitoring system metrics
 - [2016-06-15] role zk: setup zookeeper with 3 nodes

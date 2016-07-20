@@ -1,0 +1,24 @@
+#!/bin/sh
+
+LOGFILE=/var/log/backupdns.log
+
+#redirect STDOUT and STDERR to file
+exec 4<&1
+exec 5<&2
+exec 1>>$LOGFILE
+exec 2>>$LOGFILE
+
+echo "-------------------------------------------------------------------------"
+echo $(date -u) " - start backup dns configuration"
+echo "-------------------------------------------------------------------------"
+
+/usr/bin/rsync -avz /etc/named.conf /root/dns/
+/usr/bin/rsync -avz /var/named/sc.named.{{domain}} /root/dns/
+/usr/bin/rsync -avz /var/named/oa.named.{{domain}} /root/dns/
+
+echo "-------------------------------------------------------------------------"
+echo $(date -u) " - finish backup dns configuration"
+echo "-------------------------------------------------------------------------"
+
+exec 1<&4
+exec 2<&5

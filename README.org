@@ -36,12 +36,14 @@ Some ansible roles tested on CentOS Linux release 7.2.1511. Ansible yaml files a
 |  16 | mysqld_exporter | mysqld_exporter |                    |                  |                  |
 |  17 |                 |                 |                    | prometheus       |                  |
 |  18 | zabbix-agent    | zabbix-agent    | zabbix-agent       |                  |                  |
+|  19 | bind            | bind            | bind               |                  |                  |
 
 ** cisco router
 - r1
 
 * Log
 
+- [2016-07-20] role bind: setup bind name server with one primary and two slaves
 - [2016-07-20] role zabbix-agent: setup zabbix agent on linux
 - [2016-07-11] role prometheus: setup prometheus server
 - [2016-07-11] role mysqld_exporter: setup prometheus mysqld_exporter for monitoring mysqld metrics

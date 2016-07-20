@@ -1,0 +1,103 @@
+key "sc-key" {
+    algorithm HMAC-MD5;
+    secret "ZUZdBP96TP+bXUGA+TaVuRMLitTrxz5aM08mxd8u3mI=";
+};
+
+key "oa-key" {
+    algorithm HMAC-MD5;
+    secret "LZdRodIo1LCSYZMYnAta8270RFn8cUgZoL96W5LWNVU=";
+};
+
+options {
+    listen-on port 53 { 
+        any; 
+    };
+    directory 	"/var/named";
+    dump-file 	"/var/named/data/cache_dump.db";
+    statistics-file "/var/named/data/named_stats.txt";
+    memstatistics-file "/var/named/data/named_mem_stats.txt";
+    allow-query { 
+        any; 
+    };
+    allow-transfer { 
+        none; 
+    };
+    recursion no;
+    notify explicit;
+    managed-keys-directory "/var/named/dynamic";
+    pid-file "/run/named/named.pid";
+    session-keyfile "/run/named/session.key";
+};
+
+logging {
+    channel default_debug {
+        file "data/named.run";
+        severity dynamic;
+    };
+};
+
+acl sc {
+    !key oa-key;
+    key sc-key;
+    127.0.0.0/8;
+    {{sc_client}};
+};
+
+acl oa {
+    !key sc-key;
+    key oa-key;
+    {{oa_client}};
+    172.16.10.0/24;
+};
+
+view "sc-view" {
+    match-clients {
+        sc;
+    };
+    zone "{{domain}}" IN {
+        file "slaves/bak.sc.named.{{domain}}";
+        type slave;
+        masterfile-format text;
+        masters {
+            {{master}} key sc-key;
+        };
+        zone-statistics yes;
+    };
+
+    zone "citicbank.com" {
+        type forward;
+        forwarders {
+            {{scfwd01}};
+            {{scfwd02}};
+        };
+    };
+};
+
+view "oa-view" {
+    match-clients {
+        oa;
+    };
+
+    zone "{{domain}}" IN {
+        file "slaves/bak.oa.named.{{domain}}";
+        type slave;
+        masterfile-format text;
+        masters {
+            {{master}} key oa-key;
+        };
+        zone-statistics yes;
+    };
+};
+
+controls {
+    inet 127.0.0.1 port 953 allow {
+        127.0.0.1;
+    };    
+};
+
+statistics-channels {
+    inet 0.0.0.0 port 8053 allow {
+        localhost;
+        21.32.11.0/24;
+    };
+};

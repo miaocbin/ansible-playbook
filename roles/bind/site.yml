@@ -1,0 +1,21 @@
+- name: Setup bind name server with one master and two slaves
+  gather_facts: True
+  hosts: 
+  - dns
+  remote_user: root
+  roles: 
+  - bind
+  vars:
+    master: 172.16.10.81
+    ns00: 172.16.10.81
+    ns01: 172.16.10.82
+    ns02: 172.16.10.83
+    scfwd01: 172.16.0.1
+    scfwd02: 172.16.0.2
+    scntp01: 172.16.0.1
+    scntp02: 172.16.0.2
+    oantp01: 172.17.0.1
+    oantp02: 172.17.0.2
+    domain: hz.citicbank.com
+    sc_client: 172.16.0.0/16
+    oa_client: 172.17.0.0/16

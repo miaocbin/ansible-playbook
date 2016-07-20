@@ -1,0 +1,45 @@
+---
+- name: Install named server
+  yum: name={{ item }} state=present
+  with_items:
+   - bind
+   - bind-utils
+
+- name: Create directory /root/dns
+  file: path=/root/dns owner=root group=named state=directory
+  when: ansible_hostname == "test81"
+
+- name: Copy named.conf to master
+  template: src=master.named.conf.j2 dest=/etc/named.conf owner=root group=named mode=0640
+  when: ansible_hostname == "test81"
+
+- name: Copy sc.named.{{domain}} to master
+  template: src=sc.named.domain.j2 dest=/var/named/sc.named.{{domain}} owner=root group=named mode=0640
+  when: ansible_hostname == "test81"
+
+- name: Copy oa.named.{{domain}} to master
+  template: src=oa.named.domain.j2 dest=/var/named/oa.named.{{domain}} owner=root group=named mode=0640
+  when: ansible_hostname == "test81"
+
+- name: Copy backupdns.sh to /root/dns/backupdns.sh
+  template: src=backupdns.sh.j2 dest=/root/dns/backupdns.sh
+  when: ansible_hostname == "test81"
+
+- cron: name="backup dns configuration" minute="0" hour="0" job="/bin/sh /root/dns/backupdns.sh > /dev/null"
+  when: ansible_hostname == "test81"
+
+- name: Copy named.conf to slave
+  template: src=slave.named.conf.j2 dest=/etc/named.conf
+  when: ansible_hostname == "test82" or ansible_hostname == "test83"
+
+- name: Copy z-bind-stats
+  copy: src=z-bind-stats dest=/usr/bin/ mode="a+x"
+
+- name: Copy bind.conf for zabbix
+  copy: src=bind.conf dest=/etc/zabbix/zabbix_agentd.d/
+
+- name: restart zabbix-agent
+  service: name="zabbix-agent" state=restarted
+
+- name: enable named service
+  service: name=named enabled=yes state=restarted

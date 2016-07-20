@@ -1,0 +1,107 @@
+key "sc-key" {
+    algorithm HMAC-MD5;
+    secret "ZUZdBP96TP+bXUGA+TaVuRMLitTrxz5aM08mxd8u3mI=";
+};
+
+key "oa-key" {
+    algorithm HMAC-MD5;
+    secret "LZdRodIo1LCSYZMYnAta8270RFn8cUgZoL96W5LWNVU=";
+};
+
+options {
+    listen-on port 53 { 
+        any;
+    };
+    directory 	"/var/named";
+    dump-file 	"/var/named/data/cache_dump.db";
+    statistics-file "/var/named/data/named_stats.txt";
+    memstatistics-file "/var/named/data/named_mem_stats.txt";
+    allow-query {
+        any;
+    };
+    recursion no;
+    notify explicit; // default yes, notify nameserver which has NS records
+    allow-transfer {
+        none;
+    };
+    managed-keys-directory "/var/named/dynamic";
+    pid-file "/run/named/named.pid";
+    session-keyfile "/run/named/session.key";
+};
+
+logging {
+    channel default_debug {
+        file "data/named.run";
+        severity dynamic;
+    };
+};
+
+acl sc {
+    !key oa-key;
+    key sc-key;
+    localhost;
+    {{sc_client}};
+};
+
+acl oa {
+    !key sc-key;
+    key oa-key;
+    {{oa_client}};
+};
+
+view "sc-view" {
+    match-clients {
+        sc;
+    };
+    allow-transfer {
+        key sc-key;   
+    };
+    zone "{{domain}}" IN {
+        type master;
+        file "sc.named.{{domain}}";
+        also-notify {
+            {{ns01}} key sc-key;  
+            {{ns02}} key sc-key;  
+        };
+        zone-statistics yes;
+    };
+
+    zone "citicbank.com" {
+        type forward;
+        forwarders {
+            {{scfwd01}};
+            {{scfwd02}};
+        };
+    };
+};
+
+view "oa-view" {
+    match-clients {
+        oa;
+    };
+    allow-transfer {
+        key oa-key;   
+    };
+    zone "{{domain}}" IN {
+        type master;
+        file "oa.named.{{domain}}";
+        also-notify {
+            {{ns01}} key oa-key;  
+            {{ns02}} key oa-key;  
+        };
+        zone-statistics yes;
+    };
+};
+
+controls {
+    inet 127.0.0.1 port 953 allow {
+        127.0.0.1;
+    };    
+};
+
+statistics-channels {
+    inet 0.0.0.0 port 8053 allow {
+        localhost;
+        21.32.11.0/24;
+    };
+};

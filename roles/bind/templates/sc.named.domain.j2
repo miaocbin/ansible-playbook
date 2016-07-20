@@ -1,0 +1,15 @@
+$TTL 1D
+@       IN SOA  @ wanglifeng_{{domain}}. (
+                                        2016072001       ; serial YYYYMMDDNN
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        30D     ; expire
+                                        3H )    ; negative caching ttl
+@                                       IN NS  ns00.{{domain}}.
+@                                       IN NS  ns01.{{domain}}.
+@                                       IN NS  ns02.{{domain}}.
+ns00.{{domain}}. IN A {{ns00}}
+ns01.{{domain}}. IN A {{ns01}}
+ns02.{{domain}}. IN A {{ns02}}
+ntp01	IN	A  {{scntp01}}
+ntp02	IN	A  {{scntp02}}

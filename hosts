@@ -70,3 +70,13 @@ test82
 
 [prometheus]
 test88
+
+[zabbix-agent]
+test81
+test82
+test83
+
+[dns]
+test81
+test82
+test83

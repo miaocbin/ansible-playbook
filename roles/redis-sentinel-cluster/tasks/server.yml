@@ -1,0 +1,18 @@
+---
+# These tasks install redis server
+- name: Install redis server
+  yum: name={{ item }} state=present
+  with_items:
+   - redis
+
+- name: Copy redis-server configuration to master server
+  template: src=redis.conf.master.j2 dest=/etc/redis.conf
+  when: redis_master == True
+
+- name: Copy redis-server configuration to slave server
+  template: src=redis.conf.slave.j2 dest=/etc/redis.conf
+  when: redis_master == False
+
+- name: enable redis server
+  service: name=redis enabled=yes state=restarted
+

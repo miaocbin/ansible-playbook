@@ -1,0 +1,19 @@
+- name: configure the master redis server
+  hosts: 
+  - redis-master
+  remote_user: root
+  roles: 
+  - redis-sentinel-cluster
+  vars:
+    master: {name: master01, host: 172.16.10.81, port: 6379}
+    redis_master: True
+
+- name: configure the slave redis server
+  hosts: 
+  - redis-slave
+  remote_user: root
+  roles: 
+  - redis-sentinel-cluster
+  vars:
+    master: {name: master01, host: 172.16.10.81, port: 6379}
+    redis_master: False

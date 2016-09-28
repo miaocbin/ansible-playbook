@@ -1,0 +1,8 @@
+---
+# These tasks install redis sentinel
+- name: Copy redis-sentinel configuration
+  template: src=redis-sentinel.conf.j2 dest=/etc/redis-sentinel.conf
+
+- name: enable redis-sentinel
+  service: name=redis-sentinel enabled=yes state=restarted
+

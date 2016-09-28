@@ -1,0 +1,21 @@
+* Features
+
+This role setup redis server with following features:
+
+- one master and two slaves
+- each node run sentinel
+
+* Haproxy configuration
+
+#+BEGIN_EXAMPLE
+listen rediscluster 0.0.0.0:6379
+    mode tcp
+    balance first
+    option tcp-check
+    tcp-check send info\ replication\r\n
+    tcp-check expect string role:master
+
+    server node01 172.16.10.81:6379 maxconn 20000 check inter 1s
+    server node02 172.16.10.82:6379 maxconn 20000 check inter 1s
+    server node03 172.16.10.83:6379 maxconn 20000 check inter 1s
+#+END_EXAMPLE

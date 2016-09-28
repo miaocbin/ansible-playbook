@@ -80,3 +80,15 @@ test83
 test81
 test82
 test83
+
+[redis-master]
+test81
+
+[redis-slave]
+test82
+test83
+
+[redis-sentinel]
+test81 redis_sentinel=True
+test82 redis_sentinel=True
+test83 redis_sentinel=True

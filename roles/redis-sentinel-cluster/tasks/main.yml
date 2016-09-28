@@ -1,0 +1,7 @@
+---
+# These tasks install redis server and sentinel
+- include: server.yml
+
+- include: sentinel.yml
+  when: redis_sentinel
+
